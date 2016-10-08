@@ -3,6 +3,7 @@ package com.synisys.go.Task.persistance.impl;
 import com.synisys.go.Task.business.model.Entity;
 import com.synisys.go.Task.persistance.EntityRowMapper;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -10,16 +11,28 @@ import java.util.Map;
  */
 public abstract class EntityRowAbstractMapper<T extends Entity> implements EntityRowMapper<T> {
     private final T entity;
-    private String tableName;
 
-    public EntityRowAbstractMapper(T entity) {
+    protected final String tableName;
+    protected final Map<String, Object> mapper;
+
+    public EntityRowAbstractMapper(T entity, String tableName) {
         this.entity = entity;
+        this.mapper = new HashMap<>();
+        this.tableName = tableName;
     }
 
     protected T getEnity(){
         return this.entity;
     }
 
+    public String getTableName() {
+        return this.tableName;
+    }
+
+    protected abstract void constructMapping(Entity entity);
+
     @Override
-    public abstract Map<String, Object> getRowMappings() ;
+    public Map<String, Object> getRowMappings() {
+        return this.mapper;
+    }
 }

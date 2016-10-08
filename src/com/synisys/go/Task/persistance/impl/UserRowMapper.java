@@ -10,26 +10,20 @@ import java.util.Map;
  * Created by aram.hovhannisyan on 10/8/2016.
  */
 public class UserRowMapper extends EntityRowAbstractMapper<User> {
-    private final Map<String, Object> mapper;
+    public UserRowMapper(User entity, String tableName) {
+        super(entity, tableName);
 
-    public UserRowMapper(User entity) {
-        super(entity);
-        mapper = new HashMap<>();
         constructMapping(entity);
     }
 
-    private void constructMapping(User entity) {
-        mapper.put("userName", entity.getUserName());
-        mapper.put("password", entity.getPassword());
-    }
-
     @Override
-    public String getTableName() {
-        return "User";
-    }
+    protected void constructMapping(Entity entity) {
+        User user = (User)entity;
 
-    @Override
-    public Map<String, Object> getRowMappings() {
-        return mapper;
+        this.mapper.put("id", user.getId());
+        this.mapper.put("username", user.getUserName());
+        this.mapper.put("password", user.getPassword());
+        this.mapper.put("userInfoID", user.getUserInfo().getId());
+        this.mapper.put("userPreferencesID", user.getUserPreferences().getId());
     }
 }
