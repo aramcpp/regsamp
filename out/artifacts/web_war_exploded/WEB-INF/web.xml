@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+		  http://java.sun.com/xml/ns/javaee/web-app_3_1.xsd"
+           version="3.1">
+
+    <servlet>
+        <servlet-name>IndexServlet</servlet-name>
+        <servlet-class>com.synisys.go.Task.IndexServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>SigninServlet</servlet-name>
+        <servlet-class>com.synisys.go.Task.SigninServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>SignupServlet</servlet-name>
+        <servlet-class>com.synisys.go.Task.SignupServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>IndexServlet</servlet-name>
+        <url-pattern></url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>SigninServlet</servlet-name>
+        <url-pattern>/signin</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>SignupServlet</servlet-name>
+        <url-pattern>/signup</url-pattern>
+    </servlet-mapping>
+
+</web-app>
