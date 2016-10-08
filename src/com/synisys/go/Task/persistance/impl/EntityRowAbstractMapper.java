@@ -10,6 +10,7 @@ import java.util.Map;
  */
 public abstract class EntityRowAbstractMapper<T extends Entity> implements EntityRowMapper<T> {
     private final T entity;
+    private String tableName;
 
     public EntityRowAbstractMapper(T entity) {
         this.entity = entity;

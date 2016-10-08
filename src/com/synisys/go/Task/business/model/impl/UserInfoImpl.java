@@ -7,9 +7,9 @@ import com.synisys.go.Task.business.model.UserPreferences;
  * Created by aram.hovhannisyan on 10/8/2016.
  */
 public class UserInfoImpl extends EntityImpl implements UserInfo {
-    String firstName;
-    String lastName;
-    Integer age;
+    private String firstName;
+    private String lastName;
+    private Integer age;
 
     public UserInfoImpl(Integer id, String firstName, String lastName, Integer age) {
         super(id);

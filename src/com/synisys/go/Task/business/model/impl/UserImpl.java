@@ -9,10 +9,10 @@ import com.synisys.go.Task.business.model.UserPreferences;
  * Created by aram.hovhannisyan on 10/8/2016.
  */
 public class UserImpl extends EntityImpl implements User {
-    String username;
-    String password;
-    UserInfo userInfo;
-    UserPreferences userPreferences;
+    private String username;
+    private String password;
+    private UserInfo userInfo;
+    private UserPreferences userPreferences;
 
     public UserImpl(int id, String username, String password, UserInfo userInfo, UserPreferences userPreferences) {
         super(id);
