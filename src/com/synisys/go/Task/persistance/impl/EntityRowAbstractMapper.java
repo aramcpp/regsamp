@@ -15,6 +15,10 @@ public abstract class EntityRowAbstractMapper<T extends Entity> implements Entit
     protected final String tableName;
     protected final Map<String, Object> mapper;
 
+    /**
+     * QUESTION!!!!
+     * why do we need entity as a parameter of constructor??
+     */
     public EntityRowAbstractMapper(T entity, String tableName) {
         this.entity = entity;
         this.mapper = new HashMap<>();
