@@ -13,6 +13,11 @@ public class UserInfoRowMapper extends EntityRowAbstractMapper<UserInfo> {
     }
 
     @Override
+    public String getTableName() {
+        return null;
+    }
+
+    @Override
     public Map<String, Object> getRowMappings() {
         return null;
     }

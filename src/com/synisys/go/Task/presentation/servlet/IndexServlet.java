@@ -1,4 +1,4 @@
-package com.synisys.go.Task.servlet;
+package com.synisys.go.Task.presentation.servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

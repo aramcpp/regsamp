@@ -7,17 +7,17 @@
 
     <servlet>
         <servlet-name>IndexServlet</servlet-name>
-        <servlet-class>com.synisys.go.Task.servlet.IndexServlet</servlet-class>
+        <servlet-class>com.synisys.go.Task.presentation.servlet.IndexServlet</servlet-class>
     </servlet>
 
     <servlet>
         <servlet-name>SigninServlet</servlet-name>
-        <servlet-class>com.synisys.go.Task.servlet.SigninServlet</servlet-class>
+        <servlet-class>com.synisys.go.Task.presentation.servlet.SigninServlet</servlet-class>
     </servlet>
 
     <servlet>
         <servlet-name>SignupServlet</servlet-name>
-        <servlet-class>com.synisys.go.Task.servlet.SignupServlet</servlet-class>
+        <servlet-class>com.synisys.go.Task.presentation.servlet.SignupServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>

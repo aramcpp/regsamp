@@ -1,27 +1,26 @@
-package com.synisys.go.Task.servlet;
+package com.synisys.go.Task.presentation.servlet;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Sign-in Servlet
+ * Sign-up Servlet
  *
- * provided for sign-in action
- * GET method                       sends sing-in view
- * POST method                      processes sign-in action
+ * provided for sign-up action
+ * GET method                       sends sing-up view
+ * POST method                      processes sign-up action
  */
-public class SigninServlet extends HttpServlet {
+public class SignupServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        user.findFirst((User user) -> {
-            return user.getName() == "banan"
-        });
+//        UserModel user = new UserModel("dsfasdf", "asdfasdf");
+//
+//        user.save();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("signin.jsp").include(request, response);
+        request.getRequestDispatcher("signup.jsp").include(request, response);
     }
 }

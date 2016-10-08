@@ -9,7 +9,6 @@ import java.util.Map;
  * Created by aram.hovhannisyan on 10/8/2016.
  */
 public abstract class EntityRowAbstractMapper<T extends Entity> implements EntityRowMapper<T> {
-
     private final T entity;
 
     public EntityRowAbstractMapper(T entity) {
