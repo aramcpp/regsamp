@@ -6,13 +6,13 @@ import com.synisys.go.Task.persistance.EntityRowMapper;
 /**
  * Created by aram.hovhannisyan on 10/8/2016.
  */
-public interface EntityDao {
+public interface EntityDao<T extends Entity> {
 
-    <T extends Entity> Integer create(EntityRowMapper<T> entityRowMapper);
+    Integer create(T entity);
 
-    <T extends Entity> void update(EntityRowMapper<T> entityRowMapper);
+    void update(T entity);
 
-    <T extends Entity> void delete(Integer entityId);
+    void delete(Integer entityId);
 
-    <T extends Entity> T load(Integer id);
+    T load(Integer id);
 }

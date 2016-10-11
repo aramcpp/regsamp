@@ -23,44 +23,60 @@ public class DataSource {
 
 
     public static void main(String[] args) {
-        User us  = new UserImpl(1,"usasdasd1","ul1",new UserInfoImpl(1,"fn1","ln1",25),new UserPreferencesImpl(1));
 
-        EntityRowMapper<User> map = new UserRowMapper(us,"users2");
+        Set<String> set = new HashSet<>();
+        set.add("us");
+        set.add("us1");
+        set.add("us2");
+        set.add("us3");
+        set.add("us4");
 
-        EntityDaoImpl con = new EntityDaoImpl();
-//        con.create(us,map);
-        con.update(map);
+        Map<String,Object> map = new HashMap<>();
+        map.put("us",new Object());
+        map.put("us1",new Object());
+        map.put("us2",new Object());
+        DataSource data = new DataSource();
+//        data.create("users",set );
+        data.insert("users",map);
 
     }
 
-    public <T extends Entity> void create(String tableName, Set<String> columnNames) {
+    public void create(String tableName, Set<String> columnNames) {
 
         JSONObject table = getReadDb();
         JSONObject json = new JSONObject();
-        if (!table.isNull(tableName)){
+        if (!table.isNull(tableName)) {
             throw new ConcurrentModificationException();
         }
 
-        for (String columnName :columnNames ) {
-//            String columnName = stringObjectEntry.getKey();
-//            Object columnValue = stringObjectEntry.getValue();
+        for (String columnName : columnNames) {
 
-            json.put(columnName, "");
+            JSONArray column = new JSONArray();
+            json.put(columnName, column);
+
         }
 
-        JSONArray array  = new JSONArray();
-        array.put(json);
-        table.put(tableName, array);
+        table.put(tableName, json);
         writeDb(table);
 
     }
 
-    public Integer insert(String tableName, Map<String,Object> map){
+    public Integer insert( String tableName,Map<String, Object> map) {
+         JSONObject obj  = getReadDb();
+        JSONObject table  = obj.getJSONObject(tableName);
+
+        Map<String,JSONArray> tab  =new HashMap();
+       Set<String> set =  table.keySet();
+        for (String str : set) {
+
+        }
+
+
         return null;
     }
 
 
-    public <T extends Entity> void update(String tableName, Integer id, Map<String ,Object> map) {
+    public <T extends Entity> void update(String tableName, Integer id, Map<String, Object> map) {
 
    /*     JSONObject db = getReadDb();
         JSONArray array = db.getJSONArray(entityRowMapper.getTableName());

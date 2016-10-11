@@ -12,14 +12,14 @@ public class UserImpl extends EntityImpl implements User {
     private String username;
     private String password;
     private UserInfo userInfo;
-    private UserPreferences userPreferences;
+//    private UserPreferences userPreferences;
 
-    public UserImpl(int id, String username, String password, UserInfo userInfo, UserPreferences userPreferences) {
+    public UserImpl(int id, String username, String password, UserInfo userInfo) {
         super(id);
         this.username = username;
         this.password = password;
         this.userInfo = userInfo;
-        this.userPreferences = userPreferences;
+//        this.userPreferences = userPreferences;
     }
 
     @Override
@@ -32,10 +32,10 @@ public class UserImpl extends EntityImpl implements User {
         return this.password;
     }
 
-    @Override
-    public UserPreferences getUserPreferences() {
-        return this.userPreferences;
-    }
+//    @Override
+//    public UserPreferences getUserPreferences() {
+//        return this.userPreferences;
+//    }
 
     @Override
     public UserInfo getUserInfo() {

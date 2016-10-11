@@ -8,7 +8,7 @@ public interface User extends Entity {
 
     String getPassword();
 
-    UserPreferences getUserPreferences();
+//    UserPreferences getUserPreferences();
 
     UserInfo getUserInfo();
 
