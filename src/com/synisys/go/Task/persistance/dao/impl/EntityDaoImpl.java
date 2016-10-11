@@ -11,26 +11,28 @@ import java.util.Map;
  */
 public class EntityDaoImpl implements EntityDao {
     @Override
-    public <T extends Entity> void create(T entity, EntityRowMapper<T> entityRowMapper) {
+    public <T extends Entity> Integer create(EntityRowMapper<T> entityRowMapper) {
         String tableName = entityRowMapper.getTableName();
         for (Map.Entry<String, Object> stringObjectEntry : entityRowMapper.getRowMappings().entrySet()) {
             String columnName = stringObjectEntry.getKey();
             Object columnValue = stringObjectEntry.getValue();
         }
+        return null;
     }
 
     @Override
-    public <T extends Entity> void update(T entity, EntityRowMapper<T> entityRowMapper) {
-
-    }
-
-    @Override
-    public <T extends Entity> void delete(T entity, EntityRowMapper<T> entityRowMapper) {
+    public <T extends Entity> void update(EntityRowMapper<T> entityRowMapper) {
 
     }
 
     @Override
-    public <T extends Entity> void load(T entity, EntityRowMapper<T> entityRowMapper) {
+    public <T extends Entity> void delete(Integer id) {
 
+    }
+
+    @Override
+    public <T extends Entity> T load(Integer id) {
+
+        return null;
     }
 }

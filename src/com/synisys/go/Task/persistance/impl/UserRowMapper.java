@@ -23,7 +23,7 @@ public class UserRowMapper extends EntityRowAbstractMapper<User> {
         this.mapper.put("id", user.getId());
         this.mapper.put("username", user.getUserName());
         this.mapper.put("password", user.getPassword());
-        this.mapper.put("userInfoID", user.getUserInfo().getId());
-        this.mapper.put("userPreferencesID", user.getUserPreferences().getId());
+        this.mapper.put("userInfoID", user.getUserInfo());
+        this.mapper.put("userPreferencesID", user.getUserPreferences());
     }
 }

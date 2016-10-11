@@ -8,11 +8,11 @@ import com.synisys.go.Task.persistance.EntityRowMapper;
  */
 public interface EntityDao {
 
-    <T extends Entity> void create(T entity, EntityRowMapper<T> entityRowMapper);
+    <T extends Entity> Integer create(EntityRowMapper<T> entityRowMapper);
 
-    <T extends Entity> void update(T entity, EntityRowMapper<T> entityRowMapper);
+    <T extends Entity> void update(EntityRowMapper<T> entityRowMapper);
 
-    <T extends Entity> void delete(T entity, EntityRowMapper<T> entityRowMapper);
+    <T extends Entity> void delete(Integer entityId);
 
-    <T extends Entity> void load(T entity, EntityRowMapper<T> entityRowMapper);
+    <T extends Entity> T load(Integer id);
 }
