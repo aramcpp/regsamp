@@ -9,10 +9,6 @@ import com.synisys.go.Task.persistance.dao.EntityDao;
  * Created by aram.hovhannisyan on 10/8/2016.
  */
 public class UserServiceImpl extends AbstractEntitySerivce implements EntityService {
-    public UserServiceImpl(EntityDao dao) {
-        super(dao);
-    }
-
     @Override
     public Entity load(Integer id) {
         return null;
