@@ -1,6 +1,7 @@
 package com.synisys.go.Task.business.service;
 
 import com.synisys.go.Task.business.model.Entity;
+import com.synisys.go.Task.business.model.User;
 import com.synisys.go.Task.persistance.dao.EntityDao;
 
 /**
@@ -13,5 +14,5 @@ public interface EntityService {
 
     void delete(Entity entity);
 
-    EntityDao getDAOImpl();
+    Entity load(Entity user);
 }

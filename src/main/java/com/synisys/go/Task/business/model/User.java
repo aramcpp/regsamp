@@ -6,10 +6,18 @@ package com.synisys.go.Task.business.model;
 public interface User extends Entity {
     String getUserName();
 
+    void setUserName(String userName);
+
     String getPassword();
+
+    void setPassword(String password);
 
 //    UserPreferences getUserPreferences();
 
+//    void setUserPreferences(UserPreferences preferences);
+
     UserInfo getUserInfo();
+
+    void setUserInfo(UserInfo userInfo);
 
 }

@@ -12,9 +12,4 @@ public abstract class AbstractEntitySerivce implements EntityService {
     public AbstractEntitySerivce(EntityDao dao) {
         this.dao = dao;
     }
-
-    @Override
-    public EntityDao getDAOImpl() {
-        return this.dao;
-    }
 }

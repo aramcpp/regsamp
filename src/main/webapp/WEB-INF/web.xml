@@ -5,6 +5,10 @@
 		  http://java.sun.com/xml/ns/javaee/web-app_3_1.xsd"
            version="3.1">
 
+    <listener>
+        <listener-class>com.synisys.go.Task.commons.system.init.Initializer</listener-class>
+    </listener>
+
     <servlet>
         <servlet-name>IndexServlet</servlet-name>
         <servlet-class>com.synisys.go.Task.presentation.servlet.IndexServlet</servlet-class>

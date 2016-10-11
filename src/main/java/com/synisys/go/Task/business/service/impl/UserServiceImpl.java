@@ -1,6 +1,7 @@
 package com.synisys.go.Task.business.service.impl;
 
 import com.synisys.go.Task.business.model.Entity;
+import com.synisys.go.Task.business.model.User;
 import com.synisys.go.Task.business.service.EntityService;
 import com.synisys.go.Task.persistance.dao.EntityDao;
 
@@ -25,5 +26,10 @@ public class UserServiceImpl extends AbstractEntitySerivce implements EntityServ
     @Override
     public void delete(Entity entity) {
 
+    }
+
+    @Override
+    public Entity load(Entity user) {
+        return null;
     }
 }

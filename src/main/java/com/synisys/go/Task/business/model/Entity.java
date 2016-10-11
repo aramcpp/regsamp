@@ -5,4 +5,6 @@ package com.synisys.go.Task.business.model;
  */
 public interface Entity {
     Integer getId();
+
+    void setId(Integer id);
 }

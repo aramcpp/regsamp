@@ -8,12 +8,13 @@ import com.synisys.go.Task.business.model.Entity;
 public class EntityImpl implements Entity {
     private Integer id;
 
-    public EntityImpl(Integer id) {
-        this.id = id;
-    }
-
     @Override
     public Integer getId() {
         return this.id;
+    }
+
+    @Override
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

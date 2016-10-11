@@ -11,18 +11,14 @@ public class UserInfoImpl extends EntityImpl implements UserInfo {
     private String lastName;
     private Integer age;
 
-    public UserInfoImpl(Integer id, String firstName, String lastName, Integer age) {
-        super(id);
-
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-    }
-
-
     @Override
     public String getFirstName() {
         return this.firstName;
+    }
+
+    @Override
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     @Override
@@ -31,7 +27,17 @@ public class UserInfoImpl extends EntityImpl implements UserInfo {
     }
 
     @Override
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    @Override
     public int getAge() {
         return this.age;
+    }
+
+    @Override
+    public void setAge(Integer age) {
+        this.age = age;
     }
 }
