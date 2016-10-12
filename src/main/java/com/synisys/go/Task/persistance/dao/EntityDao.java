@@ -15,4 +15,6 @@ public interface EntityDao<T extends Entity> {
     void delete(Integer entityId);
 
     T load(Integer id);
+
+    T load(String userName);
 }

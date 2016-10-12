@@ -1,5 +1,8 @@
 package com.synisys.go.Task.commons.system.init;
 
+import com.synisys.go.Task.persistance.dao.impl.fs.UserDao;
+import com.synisys.go.Task.persistance.dao.impl.fs.UserInfoDao;
+
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import java.io.IOException;
@@ -17,6 +20,9 @@ public class Initializer implements ServletContextListener {
         properties = new Properties();
 
         properties.load(getClass().getResourceAsStream(CONFIG_FILE_PATH));
+
+        UserDao.init();
+        UserInfoDao.init();
     }
 
     @Override
