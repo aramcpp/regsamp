@@ -11,12 +11,12 @@ import com.synisys.go.Task.persistance.dao.EntityDao;
 /**
  * Created by aram.hovhannisyan on 10/8/2016.
  */
-public interface EntityService {
-    Entity load(Integer id) throws NoSuchIdException;
+public interface EntityService<T extends Entity> {
+    T load(Integer id) throws NoSuchIdException;
 
-    void save(Entity entity) throws DuplicateUsernameException;
+    void save(T entity) throws DuplicateUsernameException;
 
-    void delete(Entity entity) throws NoSuchIdException;
+    void delete(T entity) throws NoSuchIdException;
 
-    Entity load(String username, String password) throws DuplicateUsernameException, NoSuchUsernameException, IllegalUsernamePasswordCombinationException;
+    T load(String username, String password) throws DuplicateUsernameException, NoSuchUsernameException, IllegalUsernamePasswordCombinationException;
 }

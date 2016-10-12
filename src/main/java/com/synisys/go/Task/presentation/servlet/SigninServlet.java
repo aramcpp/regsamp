@@ -1,9 +1,9 @@
 package com.synisys.go.Task.presentation.servlet;
 
+import com.synisys.go.Task.business.model.Entity;
 import com.synisys.go.Task.business.model.User;
-import com.synisys.go.Task.business.model.impl.UserImpl;
-import com.synisys.go.Task.business.service.EntityService;
-import com.synisys.go.Task.business.service.impl.UserInfoServiceImpl;
+import com.synisys.go.Task.business.service.exception.IllegalUsernamePasswordCombinationException;
+import com.synisys.go.Task.business.service.exception.NoSuchUsernameException;
 import com.synisys.go.Task.business.service.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
@@ -14,7 +14,7 @@ import java.io.IOException;
 
 /**
  * Sign-in Servlet
- *
+ * <p>
  * provided for sign-in action
  * GET method                       sends sing-in view
  * POST method                      processes sign-in action
@@ -32,14 +32,16 @@ public class SigninServlet extends HttpServlet {
         User user = null;
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
-
-        try{
-           // user = userService.loadUserByUserNamePassword(userName, password);
+        try {
+            user = userService.load(userName, password);
             request.getSession().setAttribute("user", user);
-            request.getRequestDispatcher("userProfile.jsp").forward(request,response);
-        }catch (Exception e){
-
-            //handle invalid user name password
+            request.getRequestDispatcher("userProfile.jsp").forward(request, response);
+        } catch (NoSuchUsernameException e) {
+            e.printStackTrace();
+            request.setAttribute("username.error","No such username");
+        } catch (IllegalUsernamePasswordCombinationException e) {
+            e.printStackTrace();
+            request.setAttribute("username.error","Wrong username or password ");
         }
     }
 

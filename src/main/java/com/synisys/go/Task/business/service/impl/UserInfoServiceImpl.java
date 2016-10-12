@@ -10,7 +10,7 @@ import com.synisys.go.Task.persistance.dao.impl.fs.UserInfoDao;
 /**
  * Created by aram.hovhannisyan on 10/8/2016.
  */
-public class UserInfoServiceImpl extends AbstractEntityService implements EntityService {
+public class UserInfoServiceImpl implements EntityService<UserInfo> {
     private EntityDao<UserInfo> dao;
 
     public UserInfoServiceImpl(){
@@ -18,24 +18,24 @@ public class UserInfoServiceImpl extends AbstractEntityService implements Entity
     }
 
     @Override
-    public Entity load(Integer id) throws NoSuchIdException {
+    public UserInfo load(Integer id) throws NoSuchIdException {
         assert id != null;
-        Entity user;
+        UserInfo userInfo;
         try {
-            user = dao.load(id);
+            userInfo = dao.load(id);
         } catch (Exception e){
             throw new NoSuchIdException(String.format("There is no id: %d", id), e);
         }
-        return user;
+        return userInfo;
     }
 
     @Override
-    public void save(Entity entity) {
+    public void save(UserInfo entity) {
         throw new UnsupportedOperationException("method not supported");
     }
 
     @Override
-    public void delete(Entity entity) throws NoSuchIdException {
+    public void delete(UserInfo entity) throws NoSuchIdException {
         assert entity != null;
         try {
             dao.delete(entity.getId());
@@ -45,7 +45,7 @@ public class UserInfoServiceImpl extends AbstractEntityService implements Entity
     }
 
     @Override
-    public Entity load(String username, String password) {
+    public UserInfo load(String username, String password) {
         throw new UnsupportedOperationException("method not supported");
     }
 }

@@ -16,7 +16,7 @@
 
         <h1>Sign-up</h1>
 
-        <br />
+        <br/>
 
         <fieldset>
             <input class="form-control" type="text" name="username" placeholder="Enter username">
@@ -30,7 +30,7 @@
             <input class="form-control" type="password" name="password" placeholder="Re-enter password">
         </fieldset>
 
-        <br />
+        <br/>
 
         <fieldset>
             <input class="btn btn-primary btn-block" type="submit" value="Sign-up">

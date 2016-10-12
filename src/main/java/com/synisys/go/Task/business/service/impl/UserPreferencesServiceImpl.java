@@ -6,7 +6,7 @@ import com.synisys.go.Task.business.service.EntityService;
 /**
  * Created by aram.hovhannisyan on 10/8/2016.
  */
-public class UserPreferencesServiceImpl extends AbstractEntityService implements EntityService {
+public class UserPreferencesServiceImpl implements EntityService {
     @Override
     public Entity load(Integer id) {
         return null;

@@ -22,31 +22,37 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div class="container">
-
-            <%
-                User user = (User) session.getAttribute("user");
-                UserInfo userInfo = user.getUserInfo();
-            %>
-
-            <h1> Hi  <%=userInfo.getFirstName() + " " + userInfo. getLastName()%></h1>
+<div class="container">
 
 
-            <br />
+    <%
+        if (session.getAttribute("user") == null) {
+            response.sendRedirect("signin.jsp");
 
-                <a href="signout" >Sign out</a>
+        } else {
+            User user = (User) session.getAttribute("user");
+            UserInfo userInfo = user.getUserInfo();
+    %>
+
+    <h1> Hi  <%=userInfo.getFirstName() + " " + userInfo.getLastName()%>
+    </h1>
 
 
-                <button class="button-center" onclick="getUserInfo()">Details</button>
+    <br/>
+
+    <a href="signout">Sign out</a>
 
 
-        <div id="userInfoDiv">
-
-        </div>
+    <button class="button-center" onclick="getUserInfo()">Details</button>
 
 
+    <div id="userInfoDiv">
 
     </div>
+
+    <%}%>
+
+</div>
 
 </body>
 </html>

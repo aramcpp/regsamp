@@ -1,45 +1,53 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-    <head>
-        <title>Sign-in</title>
+<head>
+    <title>Sign-in</title>
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
 
-    <body>
-    <%if (session.getAttribute("user") != null){
+<body>
+
+<%
+    if (session.getAttribute("user") != null) {
         response.sendRedirect("userProfile.jsp");
-    return;}%>
+        return;
+    }
+%>
 
 
-        <div class="container">
-            <form class="sign-form" action="signin" method="post">
+<div class="container">
+    <form class="sign-form" action="signin" method="post">
+        <% String errorMessage = (String) request.getAttribute("username.error"); %>
 
-                <h1>Sign-in</h1>
+        <h1>Sign-in</h1>
 
-                <br />
+        <br/>
 
-                <fieldset>
-                    <input class="form-control" type="text" name="username" placeholder="Enter username">
-                </fieldset>
+        <fieldset>
+            <input class="form-control" type="text" name="username" placeholder="Enter username">
+        </fieldset>
 
-                <fieldset>
-                    <input class="form-control" type="password" name="password" placeholder="Enter password">
-                </fieldset>
+        <fieldset>
+            <input class="form-control" type="password" name="password" placeholder="Enter password">
+        </fieldset>
 
-                <br />
+        <br/>
 
-                <fieldset>
-                    <input class="btn btn-primary btn-block" type="submit" value="Sign-in">
-                </fieldset>
-            </form>
+        <fieldset>
+            <input class="btn btn-primary btn-block" type="submit" value="Sign-in">
+        </fieldset>
+    </form>
+    <%=errorMessage%>
+    <%if (errorMessage == null)%>
+    <span class="error"><%=errorMessage%></span>
 
 
 
-        </div>
-    </body>
+</div>
+</body>
 </html>

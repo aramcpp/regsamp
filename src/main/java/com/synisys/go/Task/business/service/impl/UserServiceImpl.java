@@ -1,6 +1,5 @@
 package com.synisys.go.Task.business.service.impl;
 
-import com.synisys.go.Task.business.model.Entity;
 import com.synisys.go.Task.business.model.User;
 import com.synisys.go.Task.business.service.EntityService;
 import com.synisys.go.Task.business.service.exception.DuplicateUsernameException;
@@ -13,7 +12,7 @@ import com.synisys.go.Task.persistance.dao.impl.fs.UserDao;
 /**
  * Created by aram.hovhannisyan on 10/8/2016.
  */
-public class UserServiceImpl extends AbstractEntityService implements EntityService {
+public class UserServiceImpl implements EntityService<User> {
     private EntityDao<User> dao;
 
     public UserServiceImpl(){
@@ -21,9 +20,9 @@ public class UserServiceImpl extends AbstractEntityService implements EntityServ
     }
 
     @Override
-    public Entity load(Integer id) throws NoSuchIdException {
+    public User load(Integer id) throws NoSuchIdException {
         assert id != null;
-        Entity user;
+        User user;
         try {
             user = dao.load(id);
         } catch (Exception e){
@@ -33,7 +32,7 @@ public class UserServiceImpl extends AbstractEntityService implements EntityServ
     }
 
     @Override
-    public void save(Entity entity) throws DuplicateUsernameException {
+    public void save(User entity) throws DuplicateUsernameException {
         assert entity != null;
         User user = (User) entity;
         String username = user.getUserName();
@@ -45,7 +44,7 @@ public class UserServiceImpl extends AbstractEntityService implements EntityServ
     }
 
     @Override
-    public void delete(Entity entity) throws NoSuchIdException {
+    public void delete(User entity) throws NoSuchIdException {
         assert entity != null;
         try {
             dao.delete(entity.getId());
@@ -55,7 +54,7 @@ public class UserServiceImpl extends AbstractEntityService implements EntityServ
     }
 
     @Override
-    public Entity load(String username, String password) throws NoSuchUsernameException, IllegalUsernamePasswordCombinationException {
+    public User load(String username, String password) throws NoSuchUsernameException, IllegalUsernamePasswordCombinationException {
         assert username != null;
         assert password != null;
         User user;
