@@ -10,6 +10,7 @@ public class UserInfoImpl extends EntityImpl implements UserInfo {
     private String firstName;
     private String lastName;
     private Integer age;
+    private String phone;
 
     @Override
     public String getFirstName() {
@@ -32,12 +33,20 @@ public class UserInfoImpl extends EntityImpl implements UserInfo {
     }
 
     @Override
-    public int getAge() {
+    public Integer getAge() {
         return this.age;
     }
 
     @Override
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

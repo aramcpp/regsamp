@@ -13,7 +13,7 @@ public interface UserInfo extends Entity {
 
     void setLastName(String lastName);
 
-    int getAge();
+    Integer getAge();
 
     void setAge(Integer age);
 }
