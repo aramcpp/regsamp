@@ -42,8 +42,8 @@
             <input class="btn btn-primary btn-block" type="submit" value="Sign-in">
         </fieldset>
     </form>
-    <%=errorMessage%>
-    <%if (errorMessage == null)%>
+
+    <%if (errorMessage != null)%>
     <span class="error"><%=errorMessage%></span>
 
 
