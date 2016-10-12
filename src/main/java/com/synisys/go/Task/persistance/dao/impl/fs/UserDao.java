@@ -2,6 +2,8 @@ package com.synisys.go.Task.persistance.dao.impl.fs;
 
 import com.synisys.go.Task.business.model.User;
 import com.synisys.go.Task.business.model.impl.UserImpl;
+import com.synisys.go.Task.commons.exceptions.DaoException;
+import com.synisys.go.Task.commons.system.init.Initializer;
 import com.synisys.go.Task.persistance.dao.EntityDao;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -40,7 +42,7 @@ public class UserDao implements EntityDao<User> {
 
     }
 
-    public void update(User entity) {
+    public void update(User entity) throws DaoException {
         try {
             JSONObject db = readDb();
             JSONArray table = db.getJSONArray("users");
@@ -51,11 +53,11 @@ public class UserDao implements EntityDao<User> {
             table.getJSONObject(index).put("userInfo", entity.getUserInfo().getId());
             writeDb(db);
         }catch (Exception e){
-//            throw new NotUserException("not is user");
+            throw new DaoException(" is not user");
         }
     }
 
-    public void delete(Integer entityId) {
+    public void delete(Integer entityId) throws DaoException {
         try {
         JSONObject db = readDb();
         JSONArray table = db.getJSONArray("users");
@@ -65,13 +67,13 @@ public class UserDao implements EntityDao<User> {
         table.remove(getRowIndex(entityId, table));
         writeDb(db);
         }catch (Exception e){
-//            throw new NotUserException("not is User ");
+            throw new DaoException("is not User ");
 
         }
 
     }
 
-    public User load(Integer id) {
+    public User load(Integer id) throws DaoException {
         try {
             JSONObject db = readDb();
             JSONArray table = db.getJSONArray("users");
@@ -83,33 +85,30 @@ public class UserDao implements EntityDao<User> {
             user.setUserInfo(userInfo.load(obj.getInt("userInfo")));
             return user;
         }catch (Exception e){
-//            throw
-            return null;
+            throw new DaoException("is not user");
         }
     }
 
     @Override
-    public User load(String userName) {
-        JSONObject db = readDb();
-        JSONArray table = db.getJSONArray("users");
-        for (int i = 0; i < table.length(); i++) {
+    public User load(String userName) throws DaoException {
 
-            if(table.getJSONObject(i).getString("userName").equals(userName)){
-                UserImpl user = new UserImpl();
-                user.setId(table.getJSONObject(i).getInt("id"));
-                user.setUserName(table.getJSONObject(i).getString("userName"));
-                user.setPassword(table.getJSONObject(i).getString("password"));
-                user.setUserInfo(userInfo.load(table.getJSONObject(i).getInt("userInfo")));
-                return user;
+
+            JSONObject db = readDb();
+            JSONArray table = db.getJSONArray("users");
+            for (int i = 0; i < table.length(); i++) {
+
+                if (table.getJSONObject(i).getString("userName").equals(userName)) {
+                    UserImpl user = new UserImpl();
+                    user.setId(table.getJSONObject(i).getInt("id"));
+                    user.setUserName(table.getJSONObject(i).getString("userName"));
+                    user.setPassword(table.getJSONObject(i).getString("password"));
+                    user.setUserInfo(userInfo.load(table.getJSONObject(i).getInt("userInfo")));
+                    return user;
+                }
             }
-        }
-        return null;
+
+        throw new DaoException("is not User Name");
     }
-
-
-
-
-
 
     private Integer getRowIndex(Integer id, JSONArray array) {
         int length = array.length();
@@ -123,7 +122,7 @@ public class UserDao implements EntityDao<User> {
     }
 
     private JSONObject readDb() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("src\\main\\resources\\db.json"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(Initializer.getDbPath()))) {
             return new JSONObject((reader.readLine()));
         } catch (IOException e) {
             e.printStackTrace();
@@ -132,7 +131,7 @@ public class UserDao implements EntityDao<User> {
     }
 
     private void writeDb(JSONObject json) {
-        try (FileOutputStream writer = new FileOutputStream("src\\main\\resources\\db.json")) {
+        try (FileOutputStream writer = new FileOutputStream(Initializer.getDbPath())) {
             writer.write(json.toString().getBytes());
         } catch (IOException e) {
             throw new RuntimeException(e);

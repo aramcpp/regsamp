@@ -1,5 +1,6 @@
 package com.synisys.go.Task.persistance.dao.impl.fs;
 
+import com.synisys.go.Task.commons.system.init.Initializer;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -44,7 +45,7 @@ public class IdentityGenerator {
     }
 
     private JSONObject readDb() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("src\\main\\resources\\db.json"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(Initializer.getDbPath()))) {
             return new JSONObject((reader.readLine()));
         } catch (IOException e) {
             e.printStackTrace();

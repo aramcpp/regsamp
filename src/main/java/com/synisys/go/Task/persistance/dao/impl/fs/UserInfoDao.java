@@ -2,6 +2,8 @@ package com.synisys.go.Task.persistance.dao.impl.fs;
 
 import com.synisys.go.Task.business.model.UserInfo;
 import com.synisys.go.Task.business.model.impl.UserInfoImpl;
+import com.synisys.go.Task.commons.exceptions.DaoException;
+import com.synisys.go.Task.commons.system.init.Initializer;
 import com.synisys.go.Task.persistance.dao.EntityDao;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -37,36 +39,48 @@ public class UserInfoDao implements EntityDao<UserInfo> {
         return obj.getInt("id");
     }
 
-    public void update(UserInfo entity) {
-        JSONObject db = ReadDb();
-        JSONArray table = db.getJSONArray("userInfo");
+    public void update(UserInfo entity) throws DaoException {
+        try {
+            JSONObject db = ReadDb();
+            JSONArray table = db.getJSONArray("userInfo");
 
-        Integer index = getRowIndex(entity.getId(), table);
-        table.getJSONObject(index).put("firstName", entity.getFirstName());
-        table.getJSONObject(index).put("lastName", entity.getLastName());
-        table.getJSONObject(index).put("age", entity.getAge());
-        writeDb(db);
+            Integer index = getRowIndex(entity.getId(), table);
+            table.getJSONObject(index).put("firstName", entity.getFirstName());
+            table.getJSONObject(index).put("lastName", entity.getLastName());
+            table.getJSONObject(index).put("age", entity.getAge());
+            writeDb(db);
+        } catch (Exception e){
+            throw  new DaoException("is not entity");
+        }
     }
 
-    public void delete(Integer entityId) {
-        JSONObject db = ReadDb();
-        JSONArray table = db.getJSONArray("userInfo");
-        table.remove(getRowIndex(entityId,table));
-        writeDb(db);
+    public void delete(Integer entityId) throws DaoException {
+        try {
+
+
+            JSONObject db = ReadDb();
+            JSONArray table = db.getJSONArray("userInfo");
+            table.remove(getRowIndex(entityId, table));
+            writeDb(db);
+        }catch (Exception e){
+            throw  new DaoException("is not entity Id");
+        }
     }
 
-    public UserInfo load(Integer id) {
-
-        JSONObject db = ReadDb();
-        JSONArray table = db.getJSONArray("userInfo");
-        JSONObject obj =  table.getJSONObject(getRowIndex(id,table));
-        UserInfo user = new UserInfoImpl();
-        user.setId(obj.getInt("id"));
-        user.setFirstName(obj.getString("firstName"));
-        user.setLastName(obj.getString("lastName"));
-        user.setAge(obj.getInt("age"));
-        return user;
-
+    public UserInfo load(Integer id) throws DaoException {
+        try {
+            JSONObject db = ReadDb();
+            JSONArray table = db.getJSONArray("userInfo");
+            JSONObject obj = table.getJSONObject(getRowIndex(id, table));
+            UserInfo user = new UserInfoImpl();
+            user.setId(obj.getInt("id"));
+            user.setFirstName(obj.getString("firstName"));
+            user.setLastName(obj.getString("lastName"));
+            user.setAge(obj.getInt("age"));
+            return user;
+        }catch (Exception e){
+            throw new DaoException("is not user Id");
+        }
     }
 
     @Override
@@ -86,7 +100,7 @@ public class UserInfoDao implements EntityDao<UserInfo> {
     }
 
     private JSONObject ReadDb() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("src\\main\\resources\\db.json"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(Initializer.getDbPath()))) {
             return new JSONObject((reader.readLine()));
         } catch (IOException e) {
             e.printStackTrace();
@@ -95,7 +109,7 @@ public class UserInfoDao implements EntityDao<UserInfo> {
     }
 
     private void writeDb(JSONObject json) {
-        try (FileOutputStream writer = new FileOutputStream("src\\main\\resources\\db.json")) {
+        try (FileOutputStream writer = new FileOutputStream(Initializer.getDbPath())) {
             writer.write(json.toString().getBytes());
         } catch (IOException e) {
             throw new RuntimeException(e);
