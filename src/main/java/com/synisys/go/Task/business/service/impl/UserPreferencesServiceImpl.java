@@ -1,14 +1,12 @@
 package com.synisys.go.Task.business.service.impl;
 
 import com.synisys.go.Task.business.model.Entity;
-import com.synisys.go.Task.business.model.User;
 import com.synisys.go.Task.business.service.EntityService;
-import com.synisys.go.Task.persistance.dao.EntityDao;
 
 /**
  * Created by aram.hovhannisyan on 10/8/2016.
  */
-public class UserPreferencesServiceImpl extends AbstractEntitySerivce implements EntityService {
+public class UserPreferencesServiceImpl extends AbstractEntityService implements EntityService {
     @Override
     public Entity load(Integer id) {
         return null;
@@ -25,7 +23,7 @@ public class UserPreferencesServiceImpl extends AbstractEntitySerivce implements
     }
 
     @Override
-    public Entity load(Entity user) {
+    public Entity load(String username, String password) {
         return null;
     }
 }
