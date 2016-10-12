@@ -8,16 +8,24 @@ import java.util.Properties;
 /**
  * Created by aram.hovhannisyan on 10/12/2016.
  */
+@Deprecated
 final public class DaoInitializer {
-    private static Properties properties = Initializer.getProperties();
+    private Properties properties;
+
+    public DaoInitializer() {
+        this.properties = Initializer.getProperties();
+    }
+
+    public String getDBPath() {
+        ClassLoader classLoader = getClass().getClassLoader();
+        return classLoader.getResource(this.getDBName()).getFile();
+    }
 
     public String getDBName() {
-        return properties.getProperty("db.name");
+        return this.properties.getProperty("db.name");
     }
 
     public DaoTypes getDBType() {
-        return DaoTypes.valueOf(properties.getProperty("db.type").toUpperCase());
+        return DaoTypes.valueOf(this.properties.getProperty("db.type").toUpperCase());
     }
-
-    public DaoImpl
 }

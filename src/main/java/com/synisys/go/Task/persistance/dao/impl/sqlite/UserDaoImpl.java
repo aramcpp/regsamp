@@ -27,4 +27,9 @@ public class UserDaoImpl implements EntityDao<User> {
     public User load(Integer id) {
         return null;
     }
+
+    @Override
+    public User load(String userName) {
+        return null;
+    }
 }

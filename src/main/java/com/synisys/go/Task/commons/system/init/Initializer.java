@@ -16,15 +16,7 @@ public class Initializer implements ServletContextListener {
     final String CONFIG_FILE_PATH = "/config.properties";
 
     private static Properties properties;
-
-    public Initializer() throws IOException {
-        properties = new Properties();
-
-        properties.load(getClass().getResourceAsStream(CONFIG_FILE_PATH));
-
-        UserDao.init();
-        UserInfoDao.init();
-    }
+    private static String dbPath;
 
     public static Properties getProperties() {
         if (properties == null) {
@@ -34,8 +26,24 @@ public class Initializer implements ServletContextListener {
         return properties;
     }
 
+    public static String getDbPath() {
+        return dbPath;
+    }
+
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
+        try {
+            properties = new Properties();
+            properties.load(getClass().getResourceAsStream(CONFIG_FILE_PATH));
+
+            ClassLoader classLoader = getClass().getClassLoader();
+            dbPath = classLoader.getResource(properties.getProperty("db.name")).getFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        UserDao.init();
+        UserInfoDao.init();
     }
 
     @Override

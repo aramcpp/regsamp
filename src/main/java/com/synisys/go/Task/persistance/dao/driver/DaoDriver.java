@@ -10,7 +10,7 @@ public interface DaoDriver {
 
     Map<String, Object> read(Map<String, Object> mapping);
 
-    Integer create(Map<String, Object> mapping);
+    void update(Map<String, Object> mapping);
 
-    Integer create(Map<String, Object> mapping);
+    Integer delete(Map<String, Object> mapping);
 }
