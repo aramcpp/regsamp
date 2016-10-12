@@ -1,4 +1,4 @@
-package com.synisys.go.Task.persistance.dao.impl.sqlite.connection;
+package com.synisys.go.Task.persistance.dao.driver.impl.sqlite.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

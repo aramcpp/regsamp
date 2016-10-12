@@ -1,6 +1,7 @@
-package com.synisys.go.Task.persistance.dao.impl.sqlite.db;
+package com.synisys.go.Task.persistance.dao.init;
 
 import com.synisys.go.Task.commons.system.init.Initializer;
+import com.synisys.go.Task.commons.types.DaoTypes;
 
 import java.util.Properties;
 
@@ -11,10 +12,12 @@ final public class DaoInitializer {
     private static Properties properties = Initializer.getProperties();
 
     public String getDBName() {
-        return properties.getProperty("dbname");
+        return properties.getProperty("db.name");
     }
 
-    public String getDBType() {
-        return properties.getProperty("dbname");
+    public DaoTypes getDBType() {
+        return DaoTypes.valueOf(properties.getProperty("db.type").toUpperCase());
     }
+
+    public DaoImpl
 }
