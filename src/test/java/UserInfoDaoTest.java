@@ -1,8 +1,6 @@
-import com.synisys.go.Task.business.model.User;
 import com.synisys.go.Task.business.model.UserInfo;
-import com.synisys.go.Task.business.model.impl.UserImpl;
 import com.synisys.go.Task.business.model.impl.UserInfoImpl;
-import com.synisys.go.Task.persistance.dao.impl.fs.UserDao;
+import com.synisys.go.Task.persistance.dao.impl.fs.UserInfoDao;
 
 /**
  * Created by meruzhan.gasparyan on 10/11/2016.
@@ -10,14 +8,18 @@ import com.synisys.go.Task.persistance.dao.impl.fs.UserDao;
 public class UserInfoDaoTest {
     public static void main(String[] args) {
 //
-//        UserInfo user = new UserInfoImpl(-1,"us","us1",25);
+        UserInfo user = new UserInfoImpl();
+        user.setAge(12);
+        user.setLastName("asdsad");
+        user.setFirstName("asdere");
+
 //        UserInfo user1 = new UserInfoImpl(1,"us1","us1",25);
 
-//        UserInfoDao dao = new UserInfoDao();
+        UserInfoDao dao = new UserInfoDao();
 
 
-        /* test create method UserInfoDao class
-        dao.create(user);*/
+//         test create method UserInfoDao class
+        dao.create(user);
 
         /*test load method UserInfoDao class
          UserInfo userInfo =  dao.load(1);

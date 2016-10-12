@@ -8,7 +8,6 @@ import com.synisys.go.Task.persistance.dao.EntityDao;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import javax.naming.NoInitialContextException;
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -22,7 +21,7 @@ public class UserInfoDao implements EntityDao<UserInfo> {
     private static IdentityGenerator identityGenerator;
 
     public static void  init(){
-        identityGenerator = new IdentityGenerator("usersInfo");
+        identityGenerator = new IdentityGenerator("userInfo");
     }
 
     public Integer create(UserInfo entity) {

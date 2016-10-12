@@ -1,11 +1,5 @@
 package com.synisys.go.Task.business.service.exception;
 
-import com.sun.xml.internal.ws.api.model.CheckedException;
-import com.sun.xml.internal.ws.api.model.ExceptionType;
-import com.sun.xml.internal.ws.model.CheckedExceptionImpl;
-import com.sun.xml.internal.ws.model.JavaMethodImpl;
-import com.sun.xml.internal.ws.spi.db.TypeInfo;
-
 /**
  * Created by srapion.hunanyan on 10/12/2016.
  */

@@ -41,7 +41,6 @@ public class Initializer implements ServletContextListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         UserDao.init();
         UserInfoDao.init();
     }
