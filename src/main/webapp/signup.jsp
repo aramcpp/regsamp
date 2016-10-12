@@ -12,7 +12,7 @@
 
 <body>
 <div class="container">
-    <form class="sign-form" action="/signup" method="post">
+    <form class="sign-form" action="signup" method="post">
 
         <h1>Sign-up</h1>
 

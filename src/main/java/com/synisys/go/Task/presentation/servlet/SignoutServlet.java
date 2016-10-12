@@ -7,17 +7,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Index Servlet
- *
- * GET method                           returns index page or user profile, depending on users authorisation status
+ * Created by zaven.chilingaryan on 10/12/2016.
  */
-public class IndexServlet extends HttpServlet {
+public class SignoutServlet extends HttpServlet {
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        /**
-         * TODO
-         * add sessions!!
-         */
-
-        request.getRequestDispatcher("index.jsp").include(request, response);
+       request.getSession().invalidate();
+        response.sendRedirect("/signin");
     }
 }

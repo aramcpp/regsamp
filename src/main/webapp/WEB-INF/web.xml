@@ -5,14 +5,13 @@
 		  http://java.sun.com/xml/ns/javaee/web-app_3_1.xsd"
            version="3.1">
 
+    <welcome-file-list>
+        <welcome-file>signin</welcome-file>
+    </welcome-file-list>
+
     <listener>
         <listener-class>com.synisys.go.Task.commons.system.init.Initializer</listener-class>
     </listener>
-
-    <servlet>
-        <servlet-name>IndexServlet</servlet-name>
-        <servlet-class>com.synisys.go.Task.presentation.servlet.IndexServlet</servlet-class>
-    </servlet>
 
     <servlet>
         <servlet-name>SigninServlet</servlet-name>
@@ -20,13 +19,29 @@
     </servlet>
 
     <servlet>
+        <servlet-name>SignoutServlet</servlet-name>
+        <servlet-class>com.synisys.go.Task.presentation.servlet.SignoutServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>UserInfoServlet</servlet-name>
+        <servlet-class>com.synisys.go.Task.presentation.servlet.UserInfoServlet</servlet-class>
+    </servlet>
+
+    <servlet>
         <servlet-name>SignupServlet</servlet-name>
         <servlet-class>com.synisys.go.Task.presentation.servlet.SignupServlet</servlet-class>
     </servlet>
 
+
     <servlet-mapping>
-        <servlet-name>IndexServlet</servlet-name>
-        <url-pattern></url-pattern>
+        <servlet-name>SignoutServlet</servlet-name>
+        <url-pattern>/signout</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>UserInfoServlet</servlet-name>
+        <url-pattern>/userInfo</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
