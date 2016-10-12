@@ -16,23 +16,24 @@ import java.io.IOException;
  */
 public class UserDao implements EntityDao<User> {
 
+
+    private static IdentityGenerator identityGenerator;
+
+    public static void  init(){
+        identityGenerator = new IdentityGenerator("users");
+    }
+
     private UserInfoDao userInfo = new UserInfoDao();
 
     public Integer create(User entity) {
-        JSONObject db = readDb();
-        JSONArray table = db.getJSONArray("users");
         JSONObject obj = new JSONObject();
-        if (table.length() > 0) {
-            obj.put("id", table.getJSONObject(table.length() - 1).getInt("id") + 1);
-        } else {
-            obj.put("id", 1);
-        }
-
+        obj.put("id",identityGenerator.getAndIncrement());
         obj.put("userInfo", userInfo.create(entity.getUserInfo()));
         obj.put("userName", entity.getUserName());
         obj.put("password", entity.getPassword());
-        db = readDb();
-        table = db.getJSONArray("users");
+        entity.setId(obj.getInt("id"));
+        JSONObject db = readDb();
+        JSONArray table = db.getJSONArray("users");
         table.put(obj);
         writeDb(db);
         return obj.getInt("id");
@@ -40,17 +41,22 @@ public class UserDao implements EntityDao<User> {
     }
 
     public void update(User entity) {
-        JSONObject db = readDb();
-        JSONArray table = db.getJSONArray("users");
+        try {
+            JSONObject db = readDb();
+            JSONArray table = db.getJSONArray("users");
 
-        Integer index = getRowIndex(entity.getId(), table);
-        table.getJSONObject(index).put("userName", entity.getUserName());
-        table.getJSONObject(index).put("password", entity.getPassword());
-        table.getJSONObject(index).put("userInfo", entity.getUserInfo().getId());
-        writeDb(db);
+            Integer index = getRowIndex(entity.getId(), table);
+            table.getJSONObject(index).put("userName", entity.getUserName());
+            table.getJSONObject(index).put("password", entity.getPassword());
+            table.getJSONObject(index).put("userInfo", entity.getUserInfo().getId());
+            writeDb(db);
+        }catch (Exception e){
+//            throw new NotUserException("not is user");
+        }
     }
 
     public void delete(Integer entityId) {
+        try {
         JSONObject db = readDb();
         JSONArray table = db.getJSONArray("users");
         userInfo.delete(table.getJSONObject(getRowIndex(entityId, table)).getInt("userInfo"));
@@ -58,15 +64,51 @@ public class UserDao implements EntityDao<User> {
         table = db.getJSONArray("users");
         table.remove(getRowIndex(entityId, table));
         writeDb(db);
+        }catch (Exception e){
+//            throw new NotUserException("not is User ");
+
+        }
+
     }
 
     public User load(Integer id) {
+        try {
+            JSONObject db = readDb();
+            JSONArray table = db.getJSONArray("users");
+            JSONObject obj = table.getJSONObject(getRowIndex(id, table));
+            UserImpl user = new UserImpl();
+            user.setId(obj.getInt("id"));
+            user.setUserName(obj.getString("userName"));
+            user.setPassword(obj.getString("password"));
+            user.setUserInfo(userInfo.load(obj.getInt("userInfo")));
+            return user;
+        }catch (Exception e){
+//            throw
+            return null;
+        }
+    }
+
+    @Override
+    public User load(String userName) {
         JSONObject db = readDb();
         JSONArray table = db.getJSONArray("users");
-        JSONObject obj = table.getJSONObject(getRowIndex(id, table));
-        UserImpl user = new UserImpl(obj.getInt("id"), obj.getString("userName"), obj.getString("password"), userInfo.load(obj.getInt("userInfo")));
-        return user;
+        for (int i = 0; i < table.length(); i++) {
+
+            if(table.getJSONObject(i).getString("userName").equals(userName)){
+                UserImpl user = new UserImpl();
+                user.setId(table.getJSONObject(i).getInt("id"));
+                user.setUserName(table.getJSONObject(i).getString("userName"));
+                user.setPassword(table.getJSONObject(i).getString("password"));
+                user.setUserInfo(userInfo.load(table.getJSONObject(i).getInt("userInfo")));
+                return user;
+            }
+        }
+        return null;
     }
+
+
+
+
 
 
     private Integer getRowIndex(Integer id, JSONArray array) {

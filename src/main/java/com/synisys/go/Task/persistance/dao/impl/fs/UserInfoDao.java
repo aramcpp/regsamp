@@ -6,6 +6,7 @@ import com.synisys.go.Task.persistance.dao.EntityDao;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import javax.naming.NoInitialContextException;
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -16,15 +17,18 @@ import java.io.IOException;
  */
 public class UserInfoDao implements EntityDao<UserInfo> {
 
+    private static IdentityGenerator identityGenerator;
+
+    public static void  init(){
+        identityGenerator = new IdentityGenerator("usersInfo");
+    }
+
     public Integer create(UserInfo entity) {
         JSONObject db = ReadDb();
         JSONArray table = db.getJSONArray("userInfo");
         JSONObject obj = new JSONObject();
-        if (table.length() > 0) {
-            obj.put("id", table.getJSONObject(table.length() - 1).getInt("id") + 1);
-        } else {
-            obj.put("id", 1);
-        }
+
+        obj.put("id", identityGenerator.getAndIncrement());
         obj.put("firstName", entity.getFirstName());
         obj.put("lastName", entity.getLastName());
         obj.put("age", entity.getAge());
@@ -56,9 +60,18 @@ public class UserInfoDao implements EntityDao<UserInfo> {
         JSONObject db = ReadDb();
         JSONArray table = db.getJSONArray("userInfo");
         JSONObject obj =  table.getJSONObject(getRowIndex(id,table));
-        UserInfo user = new UserInfoImpl(obj.getInt("id"),obj.getString("firstName"),obj.getString("lastName"),obj.getInt("age"));
+        UserInfo user = new UserInfoImpl();
+        user.setId(obj.getInt("id"));
+        user.setFirstName(obj.getString("firstName"));
+        user.setLastName(obj.getString("lastName"));
+        user.setAge(obj.getInt("age"));
         return user;
 
+    }
+
+    @Override
+    public UserInfo load(String userName) {
+        throw  new RuntimeException("NO initialization method");
     }
 
 
