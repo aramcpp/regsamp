@@ -26,7 +26,7 @@
     session.setAttribute("user", user);
 %>
 
-<jsp:forward page="/ServletGoToProfile" />
+<jsp:forward page="/signUpServlet" />
 
 <%
     }

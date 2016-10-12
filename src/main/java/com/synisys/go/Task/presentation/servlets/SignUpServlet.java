@@ -4,6 +4,7 @@ import com.synisys.go.Task.business.model.Entity;
 import com.synisys.go.Task.business.model.User;
 import com.synisys.go.Task.business.model.impl.UserImpl;
 import com.synisys.go.Task.business.model.impl.UserInfoImpl;
+import com.synisys.go.Task.business.service.exception.DuplicateUsernameException;
 import com.synisys.go.Task.business.service.impl.UserInfoServiceImpl;
 import com.synisys.go.Task.business.service.impl.UserServiceImpl;
 
@@ -18,7 +19,7 @@ import java.io.IOException;
 /**
  * Created by arthur.panosyan on 10/11/2016.
  */
-public class ServletGoToProfile extends HttpServlet {
+public class SignUpServlet extends HttpServlet {
 
     private UserServiceImpl userService;
 
@@ -37,11 +38,9 @@ public class ServletGoToProfile extends HttpServlet {
         try {
             userService.save((Entity) session.getAttribute("user"));
             response.sendRedirect("userProfile.jsp");
-//            request.getRequestDispatcher("userProfile.jsp").forward(request, response);
-
-        }catch (NullPointerException e){
-            //TODO: handle  user already exists
-            System.out.println(1);
+        } catch (DuplicateUsernameException e) {
+            request.setAttribute("duplicateUsernameException", "User already exists.");
+            response.sendRedirect("signup.jsp");
         }
     }
 }

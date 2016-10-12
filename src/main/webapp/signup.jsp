@@ -12,11 +12,17 @@
 
 <body>
 <div class="container">
-    <form class="sign-form"  method="post">
+    <% String userExists = (String) request.getAttribute("duplicateUsernameException");
+        if (userExists != null) {%>
+    <h1 style="color: red">User already exists.</h1>
+    <%
+        }
+    %>
+    <form class="sign-form" method="post">
 
         <h1>Sign-up</h1>
 
-        <br />
+        <br/>
 
         <fieldset>
             <input class="form-control" type="text" name="surName" placeholder="Enter sure name">
@@ -36,17 +42,17 @@
 
         <fieldset>
             <input class="form-control" type="text" name="userName" placeholder="Enter userName">
-    </fieldset>
+        </fieldset>
 
-    <fieldset>
-        <input class="form-control" type="password" name="password" placeholder="Enter password">
-    </fieldset>
+        <fieldset>
+            <input class="form-control" type="password" name="password" placeholder="Enter password">
+        </fieldset>
 
-    <br />
+        <br/>
 
-    <fieldset>
-        <input class="btn btn-primary btn-block" type="submit" value="Sign-up">
-    </fieldset>
+        <fieldset>
+            <input class="btn btn-primary btn-block" type="submit" value="Sign-up">
+        </fieldset>
     </form>
     <%@ include file="reg.jsp" %>
 </div>
