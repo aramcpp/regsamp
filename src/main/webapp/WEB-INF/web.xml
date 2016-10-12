@@ -29,8 +29,8 @@
     </servlet>
 
     <servlet>
-        <servlet-name>SignupServlet</servlet-name>
-        <servlet-class>com.synisys.go.Task.presentation.servlet.SignupServlet</servlet-class>
+        <servlet-name>signUpServlet</servlet-name>
+        <servlet-class>com.synisys.go.Task.presentation.servlet.SignUpServlet</servlet-class>
     </servlet>
 
 
@@ -50,8 +50,8 @@
     </servlet-mapping>
 
     <servlet-mapping>
-        <servlet-name>SignupServlet</servlet-name>
-        <url-pattern>/signup</url-pattern>
+        <servlet-name>signUpServlet</servlet-name>
+        <url-pattern>/signUpServlet</url-pattern>
     </servlet-mapping>
 
 </web-app>
